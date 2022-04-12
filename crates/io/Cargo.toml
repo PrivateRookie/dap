@@ -1,0 +1,30 @@
+[package]
+name = "dap-io"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+default = ["blocking"]
+blocking = []
+async = ["tokio", "dap-ty/async"]
+ws = ["blocking", "ws-tool/sync"]
+async_ws = ["async", "ws-tool/async"]
+
+
+[dependencies]
+dap-ty = { path = "../types", version = "0.1" }
+bytes = "1"
+serde_json = "1"
+serde = "1"
+tracing = "0.1"
+tokio = { version = "1.17", features = ["net", "io-util"], optional = true }
+ws-tool = { version = "0.5", optional = true, git = "https://github.com/PrivateRookie/ws-tool" }
+
+[dev-dependencies]
+clap = { version = "3", features = ["derive"] }
+tracing-subscriber = "0.3"
+n-inspector = { path = "/root/workspaces/n-inspector" }
+rand = "*"
+sourcemap = "*"
+tokio = { version = "*", features = ["full"] }
